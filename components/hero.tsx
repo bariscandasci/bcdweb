@@ -7,30 +7,27 @@ const areas = ["Veri analitiği panelleri", "İş gücü haritalama", "Özel yaz
 
 export function Hero() {
   return (
-    <section id="hero" className="relative flex min-h-svh items-center overflow-hidden pt-20 pb-16">
-      <div className="hero-grid pointer-events-none absolute inset-0" aria-hidden="true" />
+    <section id="hero" className="relative pt-16">
       <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(59,130,246,0.18),transparent_55%)]"
-        aria-hidden="true"
-      />
-
-      <div className={`${container} relative grid items-center gap-14 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-12`}>
-        <div>
+        className={`${container} relative grid items-start gap-6 py-4 lg:min-h-[calc(100svh-4rem)] lg:grid-cols-[minmax(0,0.45fr)_minmax(0,0.55fr)] lg:items-center lg:gap-8 lg:py-5`}
+      >
+        <div className="min-w-0">
           <Reveal>
             <p className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-sm text-slate-300">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#3B82F6]" aria-hidden="true" />
+              <span className="h-1.5 w-1.5 rounded-full bg-[#22D3EE]" aria-hidden="true" />
               Kurumsal teknoloji ortağı
             </p>
           </Reveal>
 
-          <Reveal delay={0.08}>
-            <h1 className="mt-6 max-w-xl text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl lg:text-[3.35rem] lg:leading-[1.08]">
-              Veriyi, iş gücünü ve operasyonu aynı netlikte yönetin.
+          <Reveal delay={0.06}>
+            <h1 className="mt-4 text-[2.45rem] font-semibold tracking-tight text-balance text-white sm:text-5xl lg:mt-5 lg:text-[3.35rem] lg:leading-[1.02] xl:text-[3.7rem]">
+              Veriyi, <span className="text-glow">iş gücünü</span> ve{" "}
+              <span className="text-glow">operasyonu</span> aynı netlikte yönetin.
             </h1>
           </Reveal>
 
-          <Reveal delay={0.14}>
-            <p className="mt-6 max-w-xl text-base leading-7 text-pretty text-slate-300 sm:text-lg sm:leading-8">
+          <Reveal delay={0.12}>
+            <p className="mt-4 max-w-xl text-sm leading-6 text-pretty text-slate-300 sm:text-base sm:leading-7">
               BCD TECHNOLOGIES, kurumsal firmalar için veri analitiği panelleri, akıllı iş gücü
               haritalama sistemleri ve özel yazılım çözümleri geliştirir. Yöneticiler, insan
               kaynakları ve operasyon ekipleri dağınık bilgiyi güvenli bir yüzeyde okur; teknoloji
@@ -39,8 +36,8 @@ export function Hero() {
             </p>
           </Reveal>
 
-          <Reveal delay={0.2}>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <Reveal delay={0.16}>
+            <div className="mt-5 flex flex-col gap-3 sm:flex-row">
               <a href="#iletisim" className={`${primaryButtonMd} w-full sm:w-auto`}>
                 Demo / Toplantı Planla
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -51,8 +48,8 @@ export function Hero() {
             </div>
           </Reveal>
 
-          <Reveal delay={0.26}>
-            <ul className="mt-8 flex flex-wrap gap-2">
+          <Reveal delay={0.2}>
+            <ul className="mt-5 flex flex-wrap gap-2">
               {areas.map((area) => (
                 <li
                   key={area}

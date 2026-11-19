@@ -3,7 +3,7 @@
 import { Menu, X } from "lucide-react";
 import { useEffect, useId, useRef, useState } from "react";
 import { Logo } from "@/components/logo";
-import { primaryButtonSm } from "@/lib/styles";
+import { container, primaryButtonSm } from "@/lib/styles";
 
 const links = [
   { href: "#cozumler", label: "Çözümlerimiz" },
@@ -43,7 +43,7 @@ export function Navbar() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#090D16]/80 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4 px-5 sm:px-6">
+      <div className={`${container} flex h-16 items-center justify-between gap-4`}>
         <Logo />
 
         <nav className="hidden items-center gap-8 lg:flex" aria-label="Bölümler">

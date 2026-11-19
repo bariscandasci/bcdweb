@@ -47,7 +47,7 @@ export function Solutions() {
 
         <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-6">
           <Reveal className="md:col-span-4 md:row-span-2">
-            <article className="panel flex h-full flex-col rounded-2xl p-6 sm:p-8">
+            <article className="panel glow-card flex h-full flex-col rounded-2xl p-6 transition duration-300 sm:p-8">
               <div className="flex items-start gap-4">
                 <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-[#3B82F6]/15 text-[#3B82F6]">
                   <LayoutDashboard className="h-5 w-5" aria-hidden="true" />
@@ -87,7 +87,7 @@ export function Solutions() {
             const Icon = card.icon;
             return (
             <Reveal key={card.title} delay={0.08 * (index + 1)} className={card.className}>
-              <article className="panel h-full rounded-2xl p-6">
+              <article className="panel glow-card h-full rounded-2xl p-6 transition duration-300">
                 <span className="grid h-11 w-11 place-items-center rounded-xl bg-[#3B82F6]/15 text-[#3B82F6]">
                   <Icon className="h-5 w-5" aria-hidden="true" />
                 </span>
@@ -99,7 +99,7 @@ export function Solutions() {
           })}
 
           <Reveal delay={0.24} className="md:col-span-6">
-            <article className="panel flex flex-col gap-6 rounded-2xl p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+            <article className="panel glow-card flex flex-col gap-6 rounded-2xl p-6 transition duration-300 sm:flex-row sm:items-center sm:justify-between sm:p-8">
               <div className="flex items-start gap-4">
                 <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-[#3B82F6]/15 text-[#3B82F6]">
                   <Cable className="h-5 w-5" aria-hidden="true" />
