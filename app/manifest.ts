@@ -8,8 +8,8 @@ export default function manifest(): MetadataRoute.Manifest {
       "Kurumsal firmalar için veri analitiği panelleri, akıllı iş gücü haritalama sistemleri ve özel yazılım çözümleri.",
     start_url: "/",
     display: "standalone",
-    background_color: "#090D16",
-    theme_color: "#090D16",
+    background_color: "#050505",
+    theme_color: "#050505",
     lang: "tr",
   };
 }

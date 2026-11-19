@@ -42,7 +42,7 @@ export function Navbar() {
   const close = () => setOpen(false);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#090D16]/80 backdrop-blur-xl">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-[#2A2418] bg-[#050505]/85 backdrop-blur-xl">
       <div className={`${container} flex h-16 items-center justify-between gap-4`}>
         <Logo />
 
@@ -76,7 +76,7 @@ export function Navbar() {
       {open ? (
         <button
           type="button"
-          className="fixed inset-0 top-16 z-40 bg-[#090D16]/95 lg:hidden"
+          className="fixed inset-0 top-16 z-40 bg-[#050505]/95 lg:hidden"
           aria-label="Menüyü kapat"
           onClick={close}
         />
@@ -86,7 +86,7 @@ export function Navbar() {
         <nav
           id={menuId}
           aria-label="Mobil bölümler"
-          className="absolute inset-x-0 top-full z-50 border-b border-white/15 bg-[#0C1220] px-5 py-4 shadow-[0_24px_60px_rgba(0,0,0,0.45)] lg:hidden"
+          className="absolute inset-x-0 top-full z-50 border-b border-[#2A2418] bg-[#0A0A0C] px-5 py-4 shadow-[0_24px_60px_rgba(0,0,0,0.45)] lg:hidden"
         >
           <ul className="flex flex-col gap-1">
             {links.map((link, index) => (
@@ -94,7 +94,7 @@ export function Navbar() {
                 <a
                   ref={index === 0 ? firstLinkRef : undefined}
                   href={link.href}
-                  className="block rounded-lg px-3 py-3 text-base text-slate-200 no-underline hover:bg-white/5 hover:text-white"
+                  className="block rounded-lg px-3 py-3 text-base text-[#E4E4E7] no-underline hover:bg-white/5 hover:text-white"
                   onClick={close}
                 >
                   {link.label}

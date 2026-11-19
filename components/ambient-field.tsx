@@ -25,6 +25,7 @@ export function AmbientField() {
   return (
     <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden="true">
       <div className="ambient-grid" />
+      <div className="ambient-guides" />
       <div className="ambient-grid-hot" />
       <div className="ambient-dots" />
       <div className="spotlight" />

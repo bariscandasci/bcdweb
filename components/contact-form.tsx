@@ -73,7 +73,7 @@ function InquiryForm({
   if (state.status === "success") {
     return (
       <div className="panel flex min-h-[28rem] flex-col justify-center rounded-2xl p-6 sm:p-8">
-        <span className="grid h-12 w-12 place-items-center rounded-full bg-[#3B82F6]/15 text-[#3B82F6]">
+        <span className="grid h-12 w-12 place-items-center rounded-full bg-[#D4AF37]/15 text-[#D4AF37]">
           <Check className="h-5 w-5" aria-hidden="true" />
         </span>
         <h3
@@ -83,7 +83,7 @@ function InquiryForm({
         >
           Talebiniz alındı
         </h3>
-        <p className="mt-3 max-w-md text-sm leading-6 text-slate-300">{state.message}</p>
+        <p className="mt-3 max-w-md text-sm leading-6 text-[#C8C4BC]">{state.message}</p>
         <button type="button" className={`${secondaryButtonMd} mt-6 w-fit`} onClick={onReset}>
           Yeni bir talep oluştur
         </button>
@@ -94,7 +94,7 @@ function InquiryForm({
   return (
     <form action={formAction} noValidate aria-busy={isPending} className="panel relative rounded-2xl p-6 sm:p-8">
       <fieldset className={`m-0 min-w-0 space-y-5 border-0 p-0 ${isPending ? "opacity-70" : ""}`}>
-        <legend className="text-sm text-slate-400">Tüm alanlar zorunludur.</legend>
+        <legend className="text-sm text-[#A1A1AA]">Tüm alanlar zorunludur.</legend>
         <div className="honeypot" aria-hidden="true">
           <label>
             Web sitesi
@@ -115,7 +115,7 @@ function InquiryForm({
         ) : null}
         <button
           type="submit"
-          className="inline-flex w-full cursor-pointer items-center justify-center rounded-xl bg-[#3B82F6] px-5 py-3 text-[15px] font-semibold text-[#090D16] transition hover:bg-[#60A5FA] disabled:cursor-not-allowed sm:w-auto"
+          className="inline-flex w-full cursor-pointer items-center justify-center rounded-xl bg-[#D4AF37] px-5 py-3 text-[15px] font-semibold text-[#050505] transition hover:bg-[#F3D59B] disabled:cursor-not-allowed sm:w-auto"
         >
           {isPending ? "Gönderiliyor..." : "Toplantı Talebi Gönder"}
         </button>
@@ -144,7 +144,7 @@ function Field({
 
   return (
     <div>
-      <label htmlFor={field.id} className="mb-2 block text-sm font-medium text-slate-200">
+      <label htmlFor={field.id} className="mb-2 block text-sm font-medium text-[#E4E4E7]">
         {field.label}
       </label>
       {field.multiline ? (
@@ -191,16 +191,16 @@ function Toast({ message, onClose }: { message: string | null; onClose: () => vo
           animate={{ opacity: 1, y: 0 }}
           exit={reduce ? undefined : { opacity: 0, y: 8 }}
         >
-          <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#3B82F6]/15 text-[#3B82F6]">
+          <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#D4AF37]/15 text-[#D4AF37]">
             <Check className="h-4 w-4" aria-hidden="true" />
           </span>
-          <p id={titleId} className="flex-1 text-sm leading-6 text-slate-100">
+          <p id={titleId} className="flex-1 text-sm leading-6 text-[#F4F4F5]">
             {message}
           </p>
           <button
             type="button"
             onClick={onClose}
-            className="cursor-pointer rounded-md p-1 text-slate-400 hover:text-white"
+            className="cursor-pointer rounded-md p-1 text-[#A1A1AA] hover:text-white"
             aria-label="Bildirimi kapat"
           >
             <X className="h-4 w-4" />

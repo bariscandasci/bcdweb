@@ -131,11 +131,11 @@ export function DashboardMockup() {
   return (
     <div className="relative flex min-w-0 flex-col lg:h-[min(700px,calc(100svh-5.5rem))]">
       <motion.aside
-        className="pointer-events-none relative z-20 -mb-3 ml-2 hidden w-60 rounded-2xl border border-cyan-300/20 bg-[#0B1220]/90 p-3 shadow-[0_16px_40px_rgba(0,0,0,0.35)] backdrop-blur-md lg:block"
+        className="pointer-events-none relative z-20 -mb-3 ml-2 hidden w-60 rounded-2xl border border-[#E5C17B]/25 bg-[#111114]/90 p-3 shadow-[0_16px_40px_rgba(0,0,0,0.35)] backdrop-blur-md lg:block"
         animate={reduce ? undefined : { y: [0, -7, 0] }}
         transition={reduce ? undefined : { duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
       >
-        <p className="flex items-center gap-1.5 text-[11px] text-cyan-200">
+        <p className="flex items-center gap-1.5 text-[11px] text-[#F3D59B]">
           <Activity className="h-3.5 w-3.5" aria-hidden="true" />
           Örnek sinyal
         </p>
@@ -143,10 +143,10 @@ export function DashboardMockup() {
       </motion.aside>
 
       <div className="mb-3 grid grid-cols-2 gap-2 lg:hidden">
-        <p className="rounded-xl border border-cyan-300/20 bg-[#0B1220]/80 px-3 py-2 text-xs font-semibold text-white">
+        <p className="rounded-xl border border-[#E5C17B]/25 bg-[#111114]/80 px-3 py-2 text-xs font-semibold text-white">
           +%34 Operasyonel Verimlilik
         </p>
-        <p className="rounded-xl border border-white/10 bg-[#0B1220]/80 px-3 py-2 text-xs font-medium text-slate-200">
+        <p className="rounded-xl border border-white/10 bg-[#111114]/80 px-3 py-2 text-xs font-medium text-[#E4E4E7]">
           Canlı Veri Senkronizasyonu Aktif
         </p>
       </div>
@@ -173,9 +173,9 @@ export function DashboardMockup() {
             <figcaption className="flex items-center justify-between gap-3 border-b border-white/10 px-4 py-3">
               <div className="min-w-0">
                 <p className="truncate text-sm font-semibold text-white">Canlı Komuta Merkezi</p>
-                <p className="text-[11px] text-slate-400">{active.kicker}</p>
+                <p className="text-[11px] text-[#A1A1AA]">{active.kicker}</p>
               </div>
-              <span className="shrink-0 rounded-full border border-cyan-300/30 bg-cyan-400/10 px-2.5 py-1 text-[11px] font-medium text-cyan-100">
+              <span className="shrink-0 rounded-full border border-[#E5C17B]/35 bg-[#D4AF37]/12 px-2.5 py-1 text-[11px] font-medium text-[#F3D59B]">
                 Örnek panel
               </span>
             </figcaption>
@@ -198,8 +198,8 @@ export function DashboardMockup() {
                     onClick={() => setTab(panel.id)}
                     className={`shrink-0 cursor-pointer rounded-lg px-3 py-1.5 text-xs font-semibold transition sm:text-[13px] ${
                       selected
-                        ? "bg-[#3B82F6] text-[#090D16]"
-                        : "text-slate-300 hover:bg-white/5 hover:text-white"
+                        ? "bg-[#D4AF37] text-[#050505]"
+                        : "text-[#C8C4BC] hover:bg-white/5 hover:text-white"
                     }`}
                   >
                     {panel.label}
@@ -226,7 +226,7 @@ export function DashboardMockup() {
                       <p className="text-base font-semibold tracking-tight text-white tabular-nums sm:text-lg">
                         {stat.value}
                       </p>
-                      <p className="mt-0.5 text-[10px] leading-4 text-slate-400 sm:text-[11px]">{stat.label}</p>
+                      <p className="mt-0.5 text-[10px] leading-4 text-[#A1A1AA] sm:text-[11px]">{stat.label}</p>
                     </div>
                   ))}
                 </div>
@@ -234,7 +234,7 @@ export function DashboardMockup() {
                 <div className="grid min-h-0 flex-1 gap-3 px-3 py-3 lg:grid-cols-[1.35fr_0.8fr]">
                   <div className="relative min-h-[180px] overflow-hidden rounded-xl border border-white/10 bg-black/25">
                     <svg viewBox="-16 -46 1040 480" className="h-full w-full font-sans">
-                      <path d={turkeyPath} fill="rgba(59,130,246,0.16)" stroke="rgba(125,211,252,0.9)" strokeWidth="3.2" strokeLinejoin="round" />
+                      <path d={turkeyPath} fill="rgba(212,175,55,0.1)" stroke="rgba(229,193,123,0.9)" strokeWidth="3.2" strokeLinejoin="round" />
                       {active.cities.map((city) => {
                         const place = places[city.name];
                         return (
@@ -244,7 +244,7 @@ export function DashboardMockup() {
                             y1={hub.y}
                             x2={place.x}
                             y2={place.y}
-                            stroke="#67E8F9"
+                            stroke="#E5C17B"
                             strokeOpacity="0.4"
                             strokeWidth="1.6"
                           />
@@ -254,8 +254,8 @@ export function DashboardMockup() {
                         const place = places[city.name];
                         return (
                           <g key={city.name}>
-                            <circle cx={place.x} cy={place.y} r="14" fill="none" stroke="#67E8F9" strokeWidth="2" className="pulse-ring" />
-                            <circle cx={place.x} cy={place.y} r="5.5" fill="#67E8F9" />
+                            <circle cx={place.x} cy={place.y} r="14" fill="none" stroke="#E5C17B" strokeWidth="2" className="pulse-ring" />
+                            <circle cx={place.x} cy={place.y} r="5.5" fill="#E5C17B" />
                             <text
                               x={place.x + place.lx}
                               y={place.y + place.ly}
@@ -272,7 +272,7 @@ export function DashboardMockup() {
                               x={place.x + place.lx}
                               y={place.y + place.ly + 20}
                               textAnchor={place.anchor}
-                              fill="#67E8F9"
+                              fill="#E5C17B"
                               fontSize="18"
                               stroke="#07111C"
                               strokeWidth="4"
@@ -287,17 +287,17 @@ export function DashboardMockup() {
                   </div>
 
                   <div className="flex flex-col justify-center rounded-xl border border-white/10 bg-black/25 px-3 py-3">
-                    <p className="mb-3 text-[11px] font-medium text-slate-400">Gösterge dağılımı</p>
+                    <p className="mb-3 text-[11px] font-medium text-[#A1A1AA]">Gösterge dağılımı</p>
                     <ul className="space-y-2.5">
                       {active.bars.map((item, index) => (
                         <li key={item.name}>
-                          <div className="mb-1 flex items-center justify-between text-[11px] text-slate-300">
+                          <div className="mb-1 flex items-center justify-between text-[11px] text-[#C8C4BC]">
                             <span>{item.name}</span>
-                            <span className="tabular-nums text-slate-400">%{item.value}</span>
+                            <span className="tabular-nums text-[#A1A1AA]">%{item.value}</span>
                           </div>
                           <div className="h-1.5 overflow-hidden rounded-full bg-white/10">
                             <motion.span
-                              className="block h-full rounded-full bg-[#3B82F6]"
+                              className="block h-full rounded-full bg-[#D4AF37]"
                               initial={reduce ? false : { width: 0 }}
                               animate={{ width: `${item.value}%` }}
                               transition={{ duration: 0.55, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
@@ -311,7 +311,7 @@ export function DashboardMockup() {
               </motion.div>
             </AnimatePresence>
 
-            <p className="border-t border-white/10 px-4 py-2.5 text-[11px] leading-5 text-slate-400">
+            <p className="border-t border-white/10 px-4 py-2.5 text-[11px] leading-5 text-[#A1A1AA]">
               Gösterilen değerler örnek arayüze aittir. Canlı müşteri verisi içermez.
             </p>
           </div>
@@ -319,18 +319,18 @@ export function DashboardMockup() {
       </motion.figure>
 
       <motion.aside
-        className="pointer-events-none relative z-20 -mt-3 mr-4 ml-auto hidden w-64 rounded-2xl border border-white/10 bg-[#0B1220]/90 p-3 shadow-[0_16px_40px_rgba(0,0,0,0.35)] backdrop-blur-md lg:block"
+        className="pointer-events-none relative z-20 -mt-3 mr-4 ml-auto hidden w-64 rounded-2xl border border-white/10 bg-[#111114]/90 p-3 shadow-[0_16px_40px_rgba(0,0,0,0.35)] backdrop-blur-md lg:block"
         animate={reduce ? undefined : { y: [0, 8, 0] }}
         transition={reduce ? undefined : { duration: 6.2, repeat: Infinity, ease: "easeInOut" }}
       >
         <p className="flex items-center gap-2 text-sm font-medium text-white">
           <span className="relative grid h-2.5 w-2.5 place-items-center" aria-hidden="true">
-            <span className="absolute h-2.5 w-2.5 rounded-full bg-cyan-300/40 pulse-ring" />
-            <span className="h-1.5 w-1.5 rounded-full bg-cyan-300" />
+            <span className="absolute h-2.5 w-2.5 rounded-full bg-[#E5C17B]/40 pulse-ring" />
+            <span className="h-1.5 w-1.5 rounded-full bg-[#E5C17B]" />
           </span>
           Canlı Veri Senkronizasyonu Aktif
         </p>
-        <p className="mt-1 flex items-center gap-1 text-[11px] text-slate-400">
+        <p className="mt-1 flex items-center gap-1 text-[11px] text-[#A1A1AA]">
           <Radio className="h-3 w-3" aria-hidden="true" />
           Örnek panel durumu
         </p>

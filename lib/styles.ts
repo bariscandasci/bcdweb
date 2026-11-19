@@ -3,7 +3,7 @@ export const container = "mx-auto w-full max-w-7xl px-5 sm:px-6";
 const buttonBase =
   "inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl font-semibold no-underline transition disabled:cursor-not-allowed disabled:opacity-60";
 
-export const primaryButton = `${buttonBase} bg-[#3B82F6] text-[#090D16] shadow-[0_10px_30px_rgba(59,130,246,0.22)] hover:bg-[#60A5FA]`;
+export const primaryButton = `${buttonBase} bg-[#D4AF37] text-[#050505] shadow-[0_10px_30px_rgba(212,175,55,0.22)] hover:bg-[#F3D59B]`;
 
 export const primaryButtonMd = `${primaryButton} px-5 py-3 text-[15px]`;
 

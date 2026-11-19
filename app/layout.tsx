@@ -44,7 +44,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#090D16",
+  themeColor: "#050505",
   colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
@@ -62,7 +62,7 @@ const jsonLd = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="tr" className={`${jakarta.variable} h-full antialiased`}>
-      <body className={`${jakarta.className} min-h-full bg-[#090D16] text-[#F4F7FB]`}>
+      <body className={`${jakarta.className} min-h-full bg-[#050505] text-white`}>
         <AmbientField />
         <div className="relative z-10">
           <a href="#icerik" className="skip-link">

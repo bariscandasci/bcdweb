@@ -2,9 +2,9 @@
 
 @theme inline {
   --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
-  --color-background: #090d16;
-  --color-foreground: #f4f7fb;
-  --color-accent: #3b82f6;
+  --color-background: #050505;
+  --color-foreground: #ffffff;
+  --color-accent: #d4af37;
 }
 
 html {
@@ -14,8 +14,8 @@ html {
 }
 
 body {
-  background: #090d16;
-  color: #f4f7fb;
+  background: #050505;
+  color: #ffffff;
 }
 
 fieldset {
@@ -26,12 +26,12 @@ fieldset {
 }
 
 ::selection {
-  background: rgba(59, 130, 246, 0.35);
+  background: rgba(212, 175, 55, 0.35);
   color: #fff;
 }
 
 :focus-visible {
-  outline: 2px solid #93c5fd;
+  outline: 2px solid #e5c17b;
   outline-offset: 3px;
 }
 
@@ -43,7 +43,7 @@ fieldset {
   transform: translateY(-160%);
   border-radius: 0.75rem;
   background: #fff;
-  color: #090d16;
+  color: #050505;
   padding: 0.55rem 1rem;
   font-size: 0.875rem;
   font-weight: 600;
@@ -60,6 +60,7 @@ fieldset {
 }
 
 .ambient-grid,
+.ambient-guides,
 .ambient-dots,
 .ambient-grid-hot {
   position: absolute;
@@ -68,25 +69,36 @@ fieldset {
 
 .ambient-grid {
   background-image:
-    linear-gradient(to right, rgba(148, 197, 255, 0.07) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(148, 197, 255, 0.07) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: radial-gradient(ellipse at 50% 30%, #000 10%, transparent 72%);
-  animation: grid-pan 32s linear infinite;
+    linear-gradient(to right, rgba(212, 175, 55, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(212, 175, 55, 0.07) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse at 50% 28%, #000 8%, transparent 74%);
+  animation: grid-pan 36s linear infinite;
+}
+
+.ambient-guides {
+  background-image:
+    linear-gradient(28deg, transparent 49.7%, rgba(212, 175, 55, 0.16) 50%, transparent 50.3%),
+    linear-gradient(-32deg, transparent 49.7%, rgba(229, 193, 123, 0.12) 50%, transparent 50.3%),
+    linear-gradient(to right, transparent 0, transparent 119px, rgba(212, 175, 55, 0.1) 119px, rgba(212, 175, 55, 0.1) 120px),
+    linear-gradient(to bottom, transparent 0, transparent 159px, rgba(212, 175, 55, 0.08) 159px, rgba(212, 175, 55, 0.08) 160px);
+  background-size: 100% 100%, 100% 100%, 120px 100%, 100% 160px;
+  opacity: 0.7;
+  mask-image: radial-gradient(ellipse at 50% 32%, #000 6%, transparent 70%);
 }
 
 .ambient-grid-hot {
   background-image:
-    linear-gradient(to right, rgba(103, 232, 249, 0.28) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(103, 232, 249, 0.28) 1px, transparent 1px);
-  background-size: 56px 56px;
+    linear-gradient(to right, rgba(243, 213, 155, 0.22) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(243, 213, 155, 0.22) 1px, transparent 1px);
+  background-size: 72px 72px;
   mask-image: radial-gradient(240px circle at var(--mx, 72vw) var(--my, 24vh), #000 0%, transparent 72%);
 }
 
 .ambient-dots {
-  background-image: radial-gradient(rgba(125, 211, 252, 0.7) 1px, transparent 1.4px);
+  background-image: radial-gradient(rgba(229, 193, 123, 0.8) 1px, transparent 1.4px);
   background-size: 28px 28px;
-  opacity: 0.28;
+  opacity: 0.16;
   mask-image: radial-gradient(ellipse at 50% 35%, #000 8%, transparent 70%);
   animation: drift 26s linear infinite;
 }
@@ -96,19 +108,19 @@ fieldset {
   inset: 0;
   background: radial-gradient(
     680px circle at var(--mx, 72vw) var(--my, 24vh),
-    rgba(34, 211, 238, 0.18),
-    rgba(59, 130, 246, 0.09) 28%,
+    rgba(212, 175, 55, 0.14),
+    rgba(170, 130, 59, 0.06) 28%,
     transparent 68%
   );
 }
 
 .text-glow {
-  background-image: linear-gradient(105deg, #f8fafc 0%, #7dd3fc 28%, #3b82f6 52%, #67e8f9 74%, #f8fafc 100%);
+  background-image: linear-gradient(105deg, #ffffff 0%, #f3d59b 28%, #d4af37 52%, #aa823b 74%, #ffffff 100%);
   background-size: 220% 100%;
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
-  filter: drop-shadow(0 0 14px rgba(56, 189, 248, 0.28));
+  filter: drop-shadow(0 0 14px rgba(212, 175, 55, 0.28));
   animation: sheen 7s linear infinite;
 }
 
@@ -123,7 +135,7 @@ fieldset {
   z-index: 2;
   border-radius: inherit;
   padding: 1.5px;
-  background: conic-gradient(from var(--glow-angle), transparent 0%, #67e8f9 12%, #3b82f6 20%, transparent 32%);
+  background: conic-gradient(from var(--glow-angle), transparent 0%, #f3d59b 12%, #d4af37 20%, transparent 32%);
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);
@@ -146,15 +158,15 @@ fieldset {
 .glow-card:hover,
 .glow-card:focus-within {
   box-shadow:
-    0 0 0 1px rgba(103, 232, 249, 0.28),
-    0 18px 50px rgba(59, 130, 246, 0.16);
+    0 0 0 1px rgba(229, 193, 123, 0.34),
+    0 18px 50px rgba(170, 130, 59, 0.18);
 }
 
 .panel {
   position: relative;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.32);
+  border: 1px solid #2a2418;
+  background: linear-gradient(180deg, rgba(17, 17, 20, 0.96), rgba(10, 10, 12, 0.94));
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.38);
 }
 
 .panel::before {
@@ -164,13 +176,13 @@ fieldset {
   right: 1.25rem;
   top: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  background: linear-gradient(90deg, transparent, rgba(229, 193, 123, 0.55), transparent);
   pointer-events: none;
 }
 
 .nav-link {
   position: relative;
-  color: #cbd5e1;
+  color: #a1a1aa;
   font-size: 0.925rem;
   font-weight: 500;
   text-decoration: none;
@@ -183,7 +195,7 @@ fieldset {
   bottom: -0.4rem;
   height: 1px;
   width: 100%;
-  background: #3b82f6;
+  background: #d4af37;
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.25s ease;
@@ -203,7 +215,7 @@ fieldset {
   width: 100%;
   border-radius: 0.85rem;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(9, 13, 22, 0.45);
+  background: rgba(5, 5, 5, 0.55);
   padding: 0.8rem 0.95rem;
   font-size: 0.95rem;
   color: #f8fafc;
@@ -211,13 +223,13 @@ fieldset {
 }
 
 .field::placeholder {
-  color: #94a3b8;
+  color: #a1a1aa;
 }
 
 .field:focus {
   outline: none;
-  border-color: rgba(59, 130, 246, 0.85);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+  border-color: rgba(212, 175, 55, 0.85);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.22);
 }
 
 .field[aria-invalid="true"] {
@@ -257,7 +269,7 @@ textarea:-webkit-autofill {
   -webkit-text-fill-color: #f8fafc;
   caret-color: #f8fafc;
   transition: background-color 9999s ease-out;
-  box-shadow: 0 0 0 1000px #101624 inset;
+  box-shadow: 0 0 0 1000px #111114 inset;
 }
 
 @keyframes rise {
@@ -332,6 +344,7 @@ textarea:-webkit-autofill {
   .bar,
   .pulse-ring,
   .ambient-grid,
+  .ambient-guides,
   .ambient-dots,
   .text-glow,
   .glow-card::after,

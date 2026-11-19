@@ -3,6 +3,7 @@ import { container } from "@/lib/styles";
 
 const links = [
   { href: "#cozumler", label: "Çözümlerimiz" },
+  { href: "#vizyon", label: "Vizyon & Misyon" },
   { href: "#yaklasim", label: "Yaklaşımımız" },
   { href: "#hakkimizda", label: "Hakkımızda" },
   { href: "#iletisim", label: "İletişim" },
@@ -14,7 +15,7 @@ export function Footer() {
       <div className={`${container} grid gap-10 py-14 md:grid-cols-3`}>
         <div>
           <Logo />
-          <p className="mt-4 max-w-xs text-sm leading-6 text-slate-400">
+          <p className="mt-4 max-w-xs text-sm leading-6 text-[#A1A1AA]">
             Kurumsal firmalar için veri analitiği panelleri, akıllı iş gücü haritalama ve özel
             yazılım.
           </p>
@@ -27,7 +28,7 @@ export function Footer() {
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className="text-sm text-slate-400 no-underline transition hover:text-white"
+                  className="text-sm text-[#A1A1AA] no-underline transition hover:text-white"
                 >
                   {link.label}
                 </a>
@@ -40,14 +41,14 @@ export function Footer() {
           <p className="text-sm font-semibold text-white">İletişim</p>
           <a
             href="mailto:iletisim@bcdtechnologies.com"
-            className="mt-4 inline-block text-sm text-slate-300 no-underline transition hover:text-white"
+            className="mt-4 inline-block text-sm text-[#C8C4BC] no-underline transition hover:text-white"
           >
             iletisim@bcdtechnologies.com
           </a>
         </div>
       </div>
       <div className="border-t border-white/10">
-        <p className={`${container} py-6 text-sm text-slate-400`}>
+        <p className={`${container} py-6 text-sm text-[#A1A1AA]`}>
           © 2026 BCD TECHNOLOGIES. Tüm hakları saklıdır.
         </p>
       </div>

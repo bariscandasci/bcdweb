@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type LogoProps = {
   className?: string;
 };
@@ -9,12 +11,20 @@ export function Logo({ className = "" }: LogoProps) {
       className={`inline-flex items-center gap-2.5 no-underline ${className}`}
       aria-label="BCD TECHNOLOGIES, sayfanın başına dön"
     >
-      <span className="h-5 w-[3px] rounded-full bg-[#3B82F6]" aria-hidden="true" />
-      <span className="text-[15px] font-semibold tracking-[-0.04em] text-white">
+      <span className="relative block h-11 w-16 shrink-0 overflow-hidden">
+        <Image
+          src="/images/bcd-logo.jpeg"
+          alt=""
+          width={1024}
+          height={1024}
+          priority
+          className="mix-blend-lighten object-cover object-top"
+          style={{ width: "100%", height: "100%" }}
+        />
+      </span>
+      <span className="text-[13px] font-semibold tracking-[0.16em] text-white sm:text-[15px]">
         BCD
-        <span className="ml-1.5 text-[11px] font-medium tracking-[0.2em] text-slate-400">
-          TECHNOLOGIES
-        </span>
+        <span className="ml-1.5 font-medium tracking-[0.18em] text-[#A1A1AA]">TECHNOLOGIES</span>
       </span>
     </a>
   );
