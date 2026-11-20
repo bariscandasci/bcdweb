@@ -1,4 +1,4 @@
-export const container = "mx-auto w-full max-w-7xl px-5 sm:px-6";
+export const container = "mx-auto w-full max-w-7xl px-6";
 
 const buttonBase =
   "inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl font-semibold no-underline transition disabled:cursor-not-allowed disabled:opacity-60";

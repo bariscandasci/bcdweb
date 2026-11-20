@@ -28,7 +28,7 @@ export function Solutions() {
   ];
 
   return (
-    <section id="cozumler" className="scroll-mt-24 py-20 sm:py-28">
+    <section id="cozumler" className="scroll-mt-24 pt-0 pb-20 sm:pb-28">
       <div className={container}>
         <Reveal>
           <SectionHeading

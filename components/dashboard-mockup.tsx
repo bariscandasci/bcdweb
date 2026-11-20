@@ -133,7 +133,7 @@ export function DashboardMockup() {
   const hub = places.Ankara;
 
   return (
-    <div className="relative flex min-w-0 flex-col lg:h-[min(700px,calc(100svh-5.5rem))]">
+    <div className="relative flex min-w-0 flex-col">
       <motion.aside
         className="pointer-events-none relative z-20 -mb-3 ml-2 hidden w-60 rounded-2xl border border-[#E5C17B]/25 bg-[#111114]/90 p-3 shadow-[0_16px_40px_rgba(0,0,0,0.35)] backdrop-blur-md lg:block"
         animate={reduce ? undefined : { y: [0, -7, 0] }}
@@ -156,13 +156,13 @@ export function DashboardMockup() {
       </div>
 
       <motion.figure
-        className="relative min-h-0 flex-1"
+        className="relative"
         style={{ perspective: 1400 }}
         onMouseEnter={() => setStraight(true)}
         onMouseLeave={() => setStraight(false)}
       >
         <motion.div
-          className="h-full"
+          className="h-auto"
           animate={
             reduce
               ? { rotateX: 0, rotateY: 0 }
@@ -173,7 +173,7 @@ export function DashboardMockup() {
           transition={{ type: "spring", stiffness: 180, damping: 22 }}
           style={{ transformStyle: "preserve-3d" }}
         >
-          <div className="panel flex h-full flex-col overflow-hidden rounded-2xl">
+          <div className="panel flex flex-col overflow-hidden rounded-2xl">
             <figcaption className="flex items-center justify-between gap-3 border-b border-white/10 px-4 py-3">
               <div className="min-w-0">
                 <p className="truncate text-sm font-semibold text-white">{text.title}</p>
@@ -218,7 +218,7 @@ export function DashboardMockup() {
                 id={`${baseId}-panel-${active.id}`}
                 role="tabpanel"
                 aria-labelledby={`${baseId}-${active.id}`}
-                className="flex min-h-0 flex-1 flex-col"
+                className="flex flex-col"
                 initial={reduce ? false : { opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={reduce ? undefined : { opacity: 0, y: -8 }}
@@ -235,8 +235,8 @@ export function DashboardMockup() {
                   ))}
                 </div>
 
-                <div className="grid min-h-0 flex-1 gap-3 px-3 py-3 lg:grid-cols-[1.35fr_0.8fr]">
-                  <div className="relative min-h-[180px] overflow-hidden rounded-xl border border-white/10 bg-black/25">
+                <div className="grid gap-3 px-3 py-3 lg:grid-cols-[1.35fr_0.8fr]">
+                  <div className="relative h-52 overflow-hidden rounded-xl border border-white/10 bg-black/25 sm:h-60">
                     <svg viewBox="-16 -46 1040 480" className="h-full w-full font-sans">
                       <path d={turkeyPath} fill="rgba(212,175,55,0.1)" stroke="rgba(229,193,123,0.9)" strokeWidth="3.2" strokeLinejoin="round" />
                       {active.cities.map((city) => {
