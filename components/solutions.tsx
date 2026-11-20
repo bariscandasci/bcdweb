@@ -1,47 +1,40 @@
+"use client";
+
 import { Blocks, Cable, LayoutDashboard, Network } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { useCopy } from "@/components/locale";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
 import { container } from "@/lib/styles";
 
-const months = [
-  { label: "Oca", height: 34 },
-  { label: "Mar", height: 52 },
-  { label: "May", height: 44 },
-  { label: "Tem", height: 68 },
-  { label: "Eyl", height: 60 },
-  { label: "Kas", height: 88 },
-];
-
-const sideCards: {
-  title: string;
-  text: string;
-  icon: LucideIcon;
-  className: string;
-}[] = [
-  {
-    title: "Akıllı İş Gücü Haritalama",
-    text: "Yetkinlik, lokasyon, doluluk ve kritik rol riski görünür olur. İK planı sezgiyle değil, güncel veriyle yürür.",
-    icon: Network,
-    className: "md:col-span-2",
-  },
-  {
-    title: "Özel Yazılım Çözümleri",
-    text: "Hazır paketin karşılamadığı süreçler için uygulama tasarlanır, geliştirilir ve devreye alınır.",
-    icon: Blocks,
-    className: "md:col-span-2",
-  },
-];
+const monthHeights = [34, 52, 44, 68, 60, 88];
 
 export function Solutions() {
+  const { copy } = useCopy();
+  const solutions = copy.solutions;
+  const sideCards: { title: string; text: string; icon: LucideIcon; className: string }[] = [
+    {
+      title: solutions.workforceTitle,
+      text: solutions.workforceText,
+      icon: Network,
+      className: "md:col-span-2",
+    },
+    {
+      title: solutions.customTitle,
+      text: solutions.customText,
+      icon: Blocks,
+      className: "md:col-span-2",
+    },
+  ];
+
   return (
     <section id="cozumler" className="scroll-mt-24 py-20 sm:py-28">
       <div className={container}>
         <Reveal>
           <SectionHeading
-            eyebrow="Çözümlerimiz"
-            title="Karar vericinin ihtiyaç duyduğu yüzey"
-            description="Dört başlıkta topluyoruz: yönetim ekranı, iş gücünün haritası, kuruma özel yazılım ve mevcut sistemlerle güvenli bağ."
+            eyebrow={solutions.eyebrow}
+            title={solutions.title}
+            description={solutions.description}
           />
         </Reveal>
 
@@ -53,29 +46,26 @@ export function Solutions() {
                   <LayoutDashboard className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <div>
-                  <h3 className="text-xl font-semibold text-white">Veri Analitiği Panelleri</h3>
-                  <p className="mt-2 max-w-xl text-sm leading-6 text-[#A1A1AA]">
-                    Yönetim ve operasyon ekipleri aynı göstergeleri, kendi rollerine göre görür.
-                    Satış, maliyet, kapasite ve risk tek yüzeyde toplanır.
-                  </p>
+                  <h3 className="text-xl font-semibold text-white">{solutions.analyticsTitle}</h3>
+                  <p className="mt-2 max-w-xl text-sm leading-6 text-[#A1A1AA]">{solutions.analyticsText}</p>
                 </div>
               </div>
 
               <div className="mt-8 flex flex-1 flex-col justify-end rounded-xl border border-white/8 bg-black/20 p-4">
                 <div className="mb-3 flex items-center justify-between text-[11px] text-[#A1A1AA]">
-                  <span>Örnek gösterge</span>
-                  <span>Aylık seyir</span>
+                  <span>{solutions.sample}</span>
+                  <span>{solutions.trend}</span>
                 </div>
                 <div className="flex h-28 items-end gap-3">
-                  {months.map((month, index) => (
-                    <div key={month.label} className="flex h-full flex-1 flex-col">
+                  {solutions.months.map((month, index) => (
+                    <div key={month} className="flex h-full flex-1 flex-col">
                       <div className="flex flex-1 items-end">
                         <span
-                          className={`bar block w-full rounded-t-md ${index === months.length - 1 ? "bg-[#D4AF37]" : "bg-[#D4AF37]/35"}`}
-                          style={{ height: `${month.height}px`, animationDelay: `${index * 70}ms` }}
+                          className={`bar block w-full rounded-t-md ${index === solutions.months.length - 1 ? "bg-[#D4AF37]" : "bg-[#D4AF37]/35"}`}
+                          style={{ height: `${monthHeights[index]}px`, animationDelay: `${index * 70}ms` }}
                         />
                       </div>
-                      <span className="mt-2 text-center text-[10px] text-[#A1A1AA]">{month.label}</span>
+                      <span className="mt-2 text-center text-[10px] text-[#A1A1AA]">{month}</span>
                     </div>
                   ))}
                 </div>
@@ -105,15 +95,12 @@ export function Solutions() {
                   <Cable className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <div>
-                  <h3 className="text-lg font-semibold text-white">Güvenli Entegrasyon</h3>
-                  <p className="mt-2 max-w-2xl text-sm leading-6 text-[#A1A1AA]">
-                    ERP, insan kaynakları, CRM ve veri ambarı bağlantıları, mevcut sistemi
-                    değiştirmeden yeni bir karar katmanı ekler.
-                  </p>
+                  <h3 className="text-lg font-semibold text-white">{solutions.integrationTitle}</h3>
+                  <p className="mt-2 max-w-2xl text-sm leading-6 text-[#A1A1AA]">{solutions.integrationText}</p>
                 </div>
               </div>
               <ul className="flex flex-wrap gap-2">
-                {["ERP", "İK sistemleri", "CRM", "Veri ambarı"].map((item) => (
+                {solutions.tags.map((item) => (
                   <li
                     key={item}
                     className="rounded-full border border-white/10 px-3 py-1.5 text-sm text-[#C8C4BC]"

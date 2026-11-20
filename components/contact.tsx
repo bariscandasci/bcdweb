@@ -1,29 +1,26 @@
+"use client";
+
 import { Check, Mail } from "lucide-react";
 import { ContactForm } from "@/components/contact-form";
+import { useCopy } from "@/components/locale";
 import { Reveal } from "@/components/reveal";
 import { container } from "@/lib/styles";
 
-const points = [
-  "Demo veya keşif toplantısı",
-  "Kurumunuza göre kapsam",
-  "Net bir sonraki adım",
-];
-
 export function Contact() {
+  const { copy } = useCopy();
+  const contact = copy.contact;
+
   return (
     <section id="iletisim" className="scroll-mt-24 py-20 sm:py-28">
       <div className={`${container} grid items-start gap-12 lg:grid-cols-[0.85fr_1.15fr]`}>
         <Reveal>
-          <p className="text-sm font-semibold text-[#D4AF37]">İletişim</p>
+          <p className="text-sm font-semibold text-[#D4AF37]">{contact.eyebrow}</p>
           <h2 className="mt-3 text-3xl font-semibold tracking-tight text-balance text-white sm:text-4xl">
-            Projenizi birlikte değerlendirelim
+            {contact.title}
           </h2>
-          <p className="mt-4 text-base leading-7 text-[#A1A1AA]">
-            Demo veya keşif toplantısı için formu doldurun. Kurumunuzun veri, iş gücü veya yazılım
-            ihtiyacını kısaca anlatmanız yeterli.
-          </p>
+          <p className="mt-4 text-base leading-7 text-[#A1A1AA]">{contact.body}</p>
           <ul className="mt-6 space-y-3">
-            {points.map((point) => (
+            {contact.points.map((point) => (
               <li key={point} className="flex items-center gap-3 text-sm text-[#C8C4BC]">
                 <span className="grid h-6 w-6 place-items-center rounded-full bg-[#D4AF37]/15 text-[#D4AF37]">
                   <Check className="h-3.5 w-3.5" aria-hidden="true" />

@@ -1,30 +1,24 @@
 "use client";
 
 import { submitInquiry } from "@/app/actions";
-import { initialInquiryState, type InquiryField } from "@/lib/inquiry";
+import { useCopy } from "@/components/locale";
+import { initialInquiryState, type InquiryErrorCode, type InquiryField } from "@/lib/inquiry";
 import { secondaryButtonMd } from "@/lib/styles";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Check, X } from "lucide-react";
 import { useActionState, useCallback, useEffect, useId, useRef, useState } from "react";
 
-const fields: {
-  id: InquiryField;
-  label: string;
+const textFields: {
+  id: Exclude<InquiryField, "solution" | "size">;
   autoComplete: string;
   maxLength: number;
   type?: string;
   multiline?: boolean;
 }[] = [
-  { id: "fullName", label: "Ad Soyad", autoComplete: "name", maxLength: 120 },
-  { id: "company", label: "Kurum Adı", autoComplete: "organization", maxLength: 160 },
-  { id: "email", label: "E-posta", autoComplete: "email", maxLength: 160, type: "email" },
-  {
-    id: "summary",
-    label: "Proje / İhtiyaç Özeti",
-    autoComplete: "off",
-    maxLength: 2000,
-    multiline: true,
-  },
+  { id: "fullName", autoComplete: "name", maxLength: 120 },
+  { id: "company", autoComplete: "organization", maxLength: 160 },
+  { id: "email", autoComplete: "email", maxLength: 160, type: "email" },
+  { id: "summary", autoComplete: "off", maxLength: 2000, multiline: true },
 ];
 
 export function ContactForm() {
@@ -52,6 +46,8 @@ function InquiryForm({
   onSuccess: (message: string) => void;
   onReset: () => void;
 }) {
+  const { copy } = useCopy();
+  const form = copy.form;
   const [state, formAction, isPending] = useActionState(submitInquiry, initialInquiryState);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const notified = useRef(false);
@@ -59,15 +55,20 @@ function InquiryForm({
   useEffect(() => {
     if (state.status === "success" && state.message && !notified.current) {
       notified.current = true;
-      onSuccess(state.message);
+      onSuccess(form.successBody);
       headingRef.current?.focus();
     }
-  }, [onSuccess, state]);
+  }, [form.successBody, onSuccess, state]);
 
   useEffect(() => {
     if (state.status !== "error" || !state.fieldErrors) return;
-    const firstInvalid = fields.find((field) => state.fieldErrors?.[field.id]);
-    if (firstInvalid) document.getElementById(firstInvalid.id)?.focus();
+    const firstInvalid = textFields.find((field) => state.fieldErrors?.[field.id]);
+    if (firstInvalid) {
+      document.getElementById(firstInvalid.id)?.focus();
+      return;
+    }
+    const choice = (["solution", "size"] as const).find((field) => state.fieldErrors?.[field]);
+    if (choice) document.querySelector<HTMLInputElement>(`input[name="${choice}"]`)?.focus();
   }, [state]);
 
   if (state.status === "success") {
@@ -81,11 +82,11 @@ function InquiryForm({
           tabIndex={-1}
           className="mt-5 text-2xl font-semibold text-white outline-none"
         >
-          Talebiniz alındı
+          {form.successTitle}
         </h3>
-        <p className="mt-3 max-w-md text-sm leading-6 text-[#C8C4BC]">{state.message}</p>
+        <p className="mt-3 max-w-md text-sm leading-6 text-[#C8C4BC]">{form.successBody}</p>
         <button type="button" className={`${secondaryButtonMd} mt-6 w-fit`} onClick={onReset}>
-          Yeni bir talep oluştur
+          {form.reset}
         </button>
       </div>
     );
@@ -94,41 +95,108 @@ function InquiryForm({
   return (
     <form action={formAction} noValidate aria-busy={isPending} className="panel relative rounded-2xl p-6 sm:p-8">
       <fieldset className={`m-0 min-w-0 space-y-5 border-0 p-0 ${isPending ? "opacity-70" : ""}`}>
-        <legend className="text-sm text-[#A1A1AA]">Tüm alanlar zorunludur.</legend>
+        <legend className="text-sm text-[#A1A1AA]">{form.legend}</legend>
         <div className="honeypot" aria-hidden="true">
           <label>
-            Web sitesi
+            {form.honeypot}
             <input name="website" tabIndex={-1} autoComplete="off" />
           </label>
         </div>
-        {fields.map((field) => (
+        {textFields.map((field) => (
           <Field
             key={field.id}
             field={field}
-            error={state.fieldErrors?.[field.id]}
+            label={labelFor(form, field.id)}
+            placeholder={field.multiline ? form.placeholder : undefined}
+            error={errorText(form, state.fieldErrors?.[field.id])}
           />
         ))}
+        <ChoiceGroup
+          name="solution"
+          legend={form.solution}
+          options={form.solutions}
+          error={errorText(form, state.fieldErrors?.solution)}
+        />
+        <ChoiceGroup
+          name="size"
+          legend={form.size}
+          options={form.sizes}
+          error={errorText(form, state.fieldErrors?.size)}
+        />
         {state.status === "error" && state.message ? (
           <p className="text-sm text-rose-300" role="alert">
-            {state.message}
+            {form.check}
           </p>
         ) : null}
         <button
           type="submit"
           className="inline-flex w-full cursor-pointer items-center justify-center rounded-xl bg-[#D4AF37] px-5 py-3 text-[15px] font-semibold text-[#050505] transition hover:bg-[#F3D59B] disabled:cursor-not-allowed sm:w-auto"
         >
-          {isPending ? "Gönderiliyor..." : "Toplantı Talebi Gönder"}
+          {isPending ? form.pending : form.submit}
         </button>
       </fieldset>
     </form>
   );
 }
 
-function Field({
-  field,
+function labelFor(form: ReturnType<typeof useCopy>["copy"]["form"], id: (typeof textFields)[number]["id"]) {
+  if (id === "fullName") return form.name;
+  if (id === "company") return form.company;
+  if (id === "email") return form.email;
+  return form.summary;
+}
+
+function errorText(
+  form: ReturnType<typeof useCopy>["copy"]["form"],
+  code?: InquiryErrorCode,
+) {
+  return code ? form.errors[code] : undefined;
+}
+
+function ChoiceGroup({
+  name,
+  legend,
+  options,
   error,
 }: {
-  field: (typeof fields)[number];
+  name: "solution" | "size";
+  legend: string;
+  options: { id: string; label: string }[];
+  error?: string;
+}) {
+  const errorId = `${name}-error`;
+  return (
+    <fieldset aria-describedby={error ? errorId : undefined}>
+      <legend className="mb-2 text-sm font-medium text-[#E4E4E7]">{legend}</legend>
+      <div className="flex flex-wrap gap-2">
+        {options.map((option) => (
+          <label
+            key={option.id}
+            className="cursor-pointer rounded-full border border-[#2A2418] px-3 py-2 text-sm text-[#C8C4BC] transition has-[:checked]:border-[#D4AF37] has-[:checked]:bg-[#D4AF37]/15 has-[:checked]:text-white has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-[#E5C17B] hover:border-[#E5C17B]/50"
+          >
+            <input type="radio" name={name} value={option.id} className="sr-only" />
+            {option.label}
+          </label>
+        ))}
+      </div>
+      {error ? (
+        <p id={errorId} className="mt-2 text-sm text-rose-300">
+          {error}
+        </p>
+      ) : null}
+    </fieldset>
+  );
+}
+
+function Field({
+  field,
+  label,
+  placeholder,
+  error,
+}: {
+  field: (typeof textFields)[number];
+  label: string;
+  placeholder?: string;
   error?: string;
 }) {
   const errorId = `${field.id}-error`;
@@ -145,14 +213,14 @@ function Field({
   return (
     <div>
       <label htmlFor={field.id} className="mb-2 block text-sm font-medium text-[#E4E4E7]">
-        {field.label}
+        {label}
       </label>
       {field.multiline ? (
         <textarea
           {...shared}
           rows={5}
           autoComplete={field.autoComplete}
-          placeholder="Kısaca kurumunuzu, hedeflediğiniz çıktıyı ve varsa mevcut sistemlerinizi yazın."
+          placeholder={placeholder}
         />
       ) : (
         <input
@@ -171,6 +239,7 @@ function Field({
 }
 
 function Toast({ message, onClose }: { message: string | null; onClose: () => void }) {
+  const { copy } = useCopy();
   const reduce = useReducedMotion();
   const titleId = useId();
 
@@ -201,7 +270,7 @@ function Toast({ message, onClose }: { message: string | null; onClose: () => vo
             type="button"
             onClick={onClose}
             className="cursor-pointer rounded-md p-1 text-[#A1A1AA] hover:text-white"
-            aria-label="Bildirimi kapat"
+            aria-label={copy.form.close}
           >
             <X className="h-4 w-4" />
           </button>

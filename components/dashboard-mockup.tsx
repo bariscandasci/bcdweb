@@ -1,5 +1,6 @@
 "use client";
 
+import { useCopy } from "@/components/locale";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Activity, Radio } from "lucide-react";
 import { useId, useState } from "react";
@@ -31,8 +32,8 @@ type Panel = {
 const panels: Panel[] = [
   {
     id: "ik",
-    label: "İK Haritalama",
-    kicker: "Yetkinlik ve doluluk",
+    label: "ik",
+    kicker: "ik",
     stats: [
       { value: "1.284", label: "Görünen çalışan" },
       { value: "%92", label: "Planlı doluluk" },
@@ -55,8 +56,8 @@ const panels: Panel[] = [
   },
   {
     id: "ops",
-    label: "Operasyon Analitiği",
-    kicker: "Kapasite ve akış",
+    label: "ops",
+    kicker: "ops",
     stats: [
       { value: "%96", label: "Kapasite" },
       { value: "18 dk", label: "Ort. akış" },
@@ -80,8 +81,8 @@ const panels: Panel[] = [
   },
   {
     id: "ai",
-    label: "Yapay Zeka Otomasyonu",
-    kicker: "Öneri ve onay kuyruğu",
+    label: "ai",
+    kicker: "ai",
     stats: [
       { value: "126", label: "Açık öneri" },
       { value: "%41", label: "Otomatik adım" },
@@ -121,11 +122,14 @@ const turkeyPath =
   "M118.3 17.6 L172.2 64.6 L187.7 67.1 L200.5 67.1 L293.1 65.8 L323.9 49.5 L401 31.3 L485.9 13.8 L539.8 50.1 L557.8 60.8 L601.5 70.8 L647.8 77.1 L720.8 78.4 L760.9 75.2 L807.2 53.3 L843.2 43.9 L894.6 50.1 L910 72.1 L943.4 106.6 L982 156.7 L969.2 194.3 L956.3 235.1 L966.6 294.6 L925.4 319.7 L879.2 310.3 L827.8 316.6 L771.2 326 L694.1 338.5 L642.7 347.9 L570.7 357.3 L539.8 382.4 L532.1 399.3 L524.4 379.3 L537.3 355.4 L524.4 344.8 L473 344.8 L455 347.9 L416.5 373 L367.6 390.5 L334.2 376.1 L293.1 357.3 L257.1 341.6 L231.4 357.3 L185.1 376.1 L174.8 352.9 L131.1 344.8 L87.4 332.2 L69.4 310.3 L77.1 285.2 L59.1 263.3 L30.8 250.7 L54 238.2 L43.7 222.5 L51.4 197.5 L41.1 184.9 L23.1 169.3 L23.1 137.9 L25.7 122.2 L18 103.4 L25.7 69 L36 34.5 L66.8 25.1 L90 17.6 Z";
 
 export function DashboardMockup() {
+  const { copy } = useCopy();
+  const text = copy.dashboard;
   const reduce = useReducedMotion();
   const [tab, setTab] = useState<TabId>("ik");
   const [straight, setStraight] = useState(false);
   const baseId = useId();
   const active = panels.find((panel) => panel.id === tab) ?? panels[0];
+  const activeText = text.panels[active.id];
   const hub = places.Ankara;
 
   return (
@@ -137,17 +141,17 @@ export function DashboardMockup() {
       >
         <p className="flex items-center gap-1.5 text-[11px] text-[#F3D59B]">
           <Activity className="h-3.5 w-3.5" aria-hidden="true" />
-          Örnek sinyal
+          {text.signal}
         </p>
-        <p className="mt-1 text-sm font-semibold text-white">+%34 Operasyonel Verimlilik</p>
+        <p className="mt-1 text-sm font-semibold text-white">{text.efficiency}</p>
       </motion.aside>
 
       <div className="mb-3 grid grid-cols-2 gap-2 lg:hidden">
         <p className="rounded-xl border border-[#E5C17B]/25 bg-[#111114]/80 px-3 py-2 text-xs font-semibold text-white">
-          +%34 Operasyonel Verimlilik
+          {text.efficiency}
         </p>
         <p className="rounded-xl border border-white/10 bg-[#111114]/80 px-3 py-2 text-xs font-medium text-[#E4E4E7]">
-          Canlı Veri Senkronizasyonu Aktif
+          {text.sync}
         </p>
       </div>
 
@@ -172,17 +176,17 @@ export function DashboardMockup() {
           <div className="panel flex h-full flex-col overflow-hidden rounded-2xl">
             <figcaption className="flex items-center justify-between gap-3 border-b border-white/10 px-4 py-3">
               <div className="min-w-0">
-                <p className="truncate text-sm font-semibold text-white">Canlı Komuta Merkezi</p>
-                <p className="text-[11px] text-[#A1A1AA]">{active.kicker}</p>
+                <p className="truncate text-sm font-semibold text-white">{text.title}</p>
+                <p className="text-[11px] text-[#A1A1AA]">{activeText.kicker}</p>
               </div>
               <span className="shrink-0 rounded-full border border-[#E5C17B]/35 bg-[#D4AF37]/12 px-2.5 py-1 text-[11px] font-medium text-[#F3D59B]">
-                Örnek panel
+                {text.sample}
               </span>
             </figcaption>
 
             <div
               role="tablist"
-              aria-label="Komuta merkezi görünümleri"
+              aria-label={text.tabs}
               className="flex gap-1 overflow-x-auto border-b border-white/10 px-3 py-2"
             >
               {panels.map((panel) => {
@@ -202,7 +206,7 @@ export function DashboardMockup() {
                         : "text-[#C8C4BC] hover:bg-white/5 hover:text-white"
                     }`}
                   >
-                    {panel.label}
+                    {text.panels[panel.id].label}
                   </button>
                 );
               })}
@@ -221,12 +225,12 @@ export function DashboardMockup() {
                 transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
               >
                 <div className="grid grid-cols-3 gap-2 px-3 pt-3">
-                  {active.stats.map((stat) => (
-                    <div key={stat.label} className="rounded-xl border border-white/10 bg-black/25 px-2.5 py-2">
+                  {active.stats.map((stat, index) => (
+                    <div key={activeText.stats[index]} className="rounded-xl border border-white/10 bg-black/25 px-2.5 py-2">
                       <p className="text-base font-semibold tracking-tight text-white tabular-nums sm:text-lg">
                         {stat.value}
                       </p>
-                      <p className="mt-0.5 text-[10px] leading-4 text-[#A1A1AA] sm:text-[11px]">{stat.label}</p>
+                      <p className="mt-0.5 text-[10px] leading-4 text-[#A1A1AA] sm:text-[11px]">{activeText.stats[index]}</p>
                     </div>
                   ))}
                 </div>
@@ -287,12 +291,12 @@ export function DashboardMockup() {
                   </div>
 
                   <div className="flex flex-col justify-center rounded-xl border border-white/10 bg-black/25 px-3 py-3">
-                    <p className="mb-3 text-[11px] font-medium text-[#A1A1AA]">Gösterge dağılımı</p>
+                    <p className="mb-3 text-[11px] font-medium text-[#A1A1AA]">{text.distribution}</p>
                     <ul className="space-y-2.5">
                       {active.bars.map((item, index) => (
-                        <li key={item.name}>
+                        <li key={activeText.bars[index]}>
                           <div className="mb-1 flex items-center justify-between text-[11px] text-[#C8C4BC]">
-                            <span>{item.name}</span>
+                            <span>{activeText.bars[index]}</span>
                             <span className="tabular-nums text-[#A1A1AA]">%{item.value}</span>
                           </div>
                           <div className="h-1.5 overflow-hidden rounded-full bg-white/10">
@@ -312,7 +316,7 @@ export function DashboardMockup() {
             </AnimatePresence>
 
             <p className="border-t border-white/10 px-4 py-2.5 text-[11px] leading-5 text-[#A1A1AA]">
-              Gösterilen değerler örnek arayüze aittir. Canlı müşteri verisi içermez.
+              {text.footnote}
             </p>
           </div>
         </motion.div>
@@ -328,11 +332,11 @@ export function DashboardMockup() {
             <span className="absolute h-2.5 w-2.5 rounded-full bg-[#E5C17B]/40 pulse-ring" />
             <span className="h-1.5 w-1.5 rounded-full bg-[#E5C17B]" />
           </span>
-          Canlı Veri Senkronizasyonu Aktif
+          {text.sync}
         </p>
         <p className="mt-1 flex items-center gap-1 text-[11px] text-[#A1A1AA]">
           <Radio className="h-3 w-3" aria-hidden="true" />
-          Örnek panel durumu
+          {text.syncNote}
         </p>
       </motion.aside>
     </div>

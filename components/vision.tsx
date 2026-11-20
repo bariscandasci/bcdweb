@@ -1,20 +1,19 @@
+"use client";
+
+import { useCopy } from "@/components/locale";
 import { Reveal } from "@/components/reveal";
 import { container } from "@/lib/styles";
 
-const statements = [
-  {
-    title: "Misyonumuz",
-    text: "İşletmelerin karmaşık insan kaynakları, saha operasyonu ve veri süreçlerini; yüksek performanslı analitik paneller, coğrafi bilgi sistemleri ve yapay zeka tabanlı yazılımlarla sadeleştirerek ölçülebilir verimlilik sağlamak.",
-  },
-  {
-    title: "Vizyonumuz",
-    text: "Kurumsal yazılım ve veri zekâsı alanında geliştirdiği yenilikçi ürünlerle Türkiye'den çıkan öncü teknoloji şirketlerinden biri olmak ve işletmelerin dijital dönüşüm standartlarını belirlemek.",
-  },
-];
-
 export function Vision() {
+  const { copy } = useCopy();
+  const vision = copy.vision;
+  const statements = [
+    { title: vision.missionTitle, text: vision.mission },
+    { title: vision.visionTitle, text: vision.vision },
+  ];
+
   return (
-    <section id="vizyon" className="scroll-mt-24 pb-20 sm:pb-28">
+    <section id="vizyon" className="scroll-mt-24 py-20 sm:py-28">
       <div className={container}>
         <Reveal>
           <div className="relative overflow-hidden rounded-3xl border border-[#2A2418] bg-[#111114] px-6 py-10 sm:px-10 sm:py-12">
@@ -23,7 +22,7 @@ export function Vision() {
               aria-hidden="true"
             />
             <p className="text-sm font-semibold tracking-[0.16em] text-[#E5C17B] uppercase">
-              Vizyon & Misyon
+              {vision.eyebrow}
             </p>
             <div className="mt-8 grid gap-8 lg:grid-cols-2 lg:gap-12">
               {statements.map((statement) => (

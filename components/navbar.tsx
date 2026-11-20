@@ -2,16 +2,43 @@
 
 import { Menu, X } from "lucide-react";
 import { useEffect, useId, useRef, useState } from "react";
+import { useCopy } from "@/components/locale";
 import { Logo } from "@/components/logo";
+import type { Locale } from "@/lib/messages";
 import { container, primaryButtonSm } from "@/lib/styles";
 
-const links = [
-  { href: "#cozumler", label: "Çözümlerimiz" },
-  { href: "#yaklasim", label: "Yaklaşımımız" },
-  { href: "#hakkimizda", label: "Hakkımızda" },
-];
+function LanguageSwitch() {
+  const { locale, setLocale, copy } = useCopy();
+  const option = (code: Locale, label: string) => (
+    <button
+      type="button"
+      aria-pressed={locale === code}
+      onClick={() => setLocale(code)}
+      className={`cursor-pointer px-1 ${locale === code ? "text-[#E5C17B]" : "text-[#A1A1AA] hover:text-white"}`}
+    >
+      {label}
+    </button>
+  );
+
+  return (
+    <div role="group" aria-label={copy.langLabel} className="flex items-center text-xs font-semibold tracking-[0.16em]">
+      {option("tr", "TR")}
+      <span className="text-[#5A5348]" aria-hidden="true">
+        |
+      </span>
+      {option("en", "EN")}
+    </div>
+  );
+}
 
 export function Navbar() {
+  const { copy } = useCopy();
+  const links = [
+    { href: "#cozumler", label: copy.nav.solutions },
+    { href: "#senaryolar", label: copy.nav.scenarios },
+    { href: "#yaklasim", label: copy.nav.approach },
+    { href: "#hakkimizda", label: copy.nav.about },
+  ];
   const [open, setOpen] = useState(false);
   const menuId = useId();
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
@@ -46,7 +73,7 @@ export function Navbar() {
       <div className={`${container} flex h-16 items-center justify-between gap-4`}>
         <Logo />
 
-        <nav className="hidden items-center gap-8 lg:flex" aria-label="Bölümler">
+        <nav className="hidden items-center gap-6 lg:flex xl:gap-8" aria-label={copy.nav.menu}>
           {links.map((link) => (
             <a key={link.href} href={link.href} className="nav-link">
               {link.label}
@@ -54,10 +81,11 @@ export function Navbar() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
+          <LanguageSwitch />
           <div className="hidden sm:block">
             <a href="#iletisim" className={primaryButtonSm}>
-              İletişime Geç
+              {copy.nav.contact}
             </a>
           </div>
           <button
@@ -68,7 +96,7 @@ export function Navbar() {
             onClick={() => setOpen((value) => !value)}
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            <span className="sr-only">{open ? "Menüyü kapat" : "Menüyü aç"}</span>
+            <span className="sr-only">{open ? copy.nav.close : copy.nav.open}</span>
           </button>
         </div>
       </div>
@@ -77,7 +105,7 @@ export function Navbar() {
         <button
           type="button"
           className="fixed inset-0 top-16 z-40 bg-[#050505]/95 lg:hidden"
-          aria-label="Menüyü kapat"
+          aria-label={copy.nav.close}
           onClick={close}
         />
       ) : null}
@@ -85,7 +113,7 @@ export function Navbar() {
       {open ? (
         <nav
           id={menuId}
-          aria-label="Mobil bölümler"
+          aria-label={copy.nav.menu}
           className="absolute inset-x-0 top-full z-50 border-b border-[#2A2418] bg-[#0A0A0C] px-5 py-4 shadow-[0_24px_60px_rgba(0,0,0,0.45)] lg:hidden"
         >
           <ul className="flex flex-col gap-1">
@@ -104,7 +132,7 @@ export function Navbar() {
           </ul>
           <div className="mt-3 sm:hidden">
             <a href="#iletisim" className={`${primaryButtonSm} w-full`} onClick={close}>
-              İletişime Geç
+              {copy.nav.contact}
             </a>
           </div>
         </nav>

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import type { ReactNode } from "react";
 import { AmbientField } from "@/components/ambient-field";
+import { LocaleProvider, SkipLink } from "@/components/locale";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -65,9 +66,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className={`${jakarta.className} min-h-full bg-[#050505] text-white`}>
         <AmbientField />
         <div className="relative z-10">
-          <a href="#icerik" className="skip-link">
-            İçeriğe geç
-          </a>
+          <LocaleProvider>
+          <SkipLink />
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{
@@ -75,6 +75,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             }}
           />
           {children}
+          </LocaleProvider>
         </div>
       </body>
     </html>

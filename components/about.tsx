@@ -1,22 +1,13 @@
+"use client";
+
+import { useCopy } from "@/components/locale";
 import { Reveal } from "@/components/reveal";
 import { container } from "@/lib/styles";
 
-const principles = [
-  {
-    title: "Şeffaflık",
-    text: "Ne ölçüldüğü ve kimin gördüğü baştan tanımlanır. Sürpriz metrik bırakmayız.",
-  },
-  {
-    title: "Sadelik",
-    text: "Arayüz, karar anına hizmet eder. Gösteriş, yöneticinin işini yavaşlatmaz.",
-  },
-  {
-    title: "Süreklilik",
-    text: "Teslim bir bitiş değildir. Sistem, kurumunuzun ritmiyle birlikte yaşar.",
-  },
-];
-
 export function About() {
+  const { copy } = useCopy();
+  const about = copy.about;
+
   return (
     <section id="hakkimizda" className="relative scroll-mt-24 overflow-hidden py-20 sm:py-28">
       <div
@@ -25,26 +16,19 @@ export function About() {
       />
       <div className={`${container} relative grid items-start gap-12 lg:grid-cols-[1.15fr_0.85fr]`}>
         <Reveal>
-          <p className="text-sm font-semibold text-[#D4AF37]">Hakkımızda</p>
+          <p className="text-sm font-semibold text-[#D4AF37]">{about.eyebrow}</p>
           <h2 className="mt-3 max-w-xl text-3xl font-semibold tracking-tight text-balance text-white sm:text-4xl">
-            Teknoloji, karar hızını artırmalı; karmaşıklığını değil.
+            {about.title}
           </h2>
           <div className="mt-6 max-w-xl space-y-4 text-base leading-7 text-[#C8C4BC]">
-            <p>
-              BCD TECHNOLOGIES, kurumsal karar vericilerin dağınık veriyi güvenle okuyabildiği
-              sistemler kurar. Vizyonumuz; insan kaynakları, operasyon ve yönetim ekiplerinin aynı
-              gerçeği gördüğü, sade ve denetlenebilir bir teknoloji katmanıdır.
-            </p>
-            <p>
-              Güvenilirlik bizim için bir slogan değildir. Erişim, kayıt ve sorumluluk sınırları
-              projenin ilk gününden tanımlanır. Kurum, yazılımın içinde ne olduğunu bilir.
-            </p>
+            <p>{about.p1}</p>
+            <p>{about.p2}</p>
           </div>
         </Reveal>
 
         <Reveal delay={0.1}>
           <ul className="divide-y divide-white/10 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
-            {principles.map((principle) => (
+            {about.principles.map((principle) => (
               <li key={principle.title} className="p-5 sm:p-6">
                 <h3 className="text-base font-semibold text-white">{principle.title}</h3>
                 <p className="mt-2 text-sm leading-6 text-[#A1A1AA]">{principle.text}</p>
